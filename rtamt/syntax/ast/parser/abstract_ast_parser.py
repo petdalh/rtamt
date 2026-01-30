@@ -1,6 +1,7 @@
 from abc import ABCMeta
 import logging
 import importlib
+import interval
 from antlr4 import *
 from antlr4.InputStream import InputStream
 from antlr4.error.ErrorListener import ErrorListener
@@ -223,6 +224,8 @@ class AbstractAst:
             var = int()
         elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
             var = complex()
+        elif var_type.encode('utf-8') == 'interval'.encode('utf-8'):
+            var = interval.interval()
         else:
             try:
                 var_module = self.modules[var_type]

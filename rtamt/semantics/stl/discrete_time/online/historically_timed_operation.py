@@ -1,4 +1,5 @@
 import collections
+import interval
 from rtamt.semantics.abstract_online_operation import AbstractOnlineOperation
 class HistoricallyTimedOperation(AbstractOnlineOperation):
     def __init__(self, begin, end):
@@ -10,12 +11,13 @@ class HistoricallyTimedOperation(AbstractOnlineOperation):
 
     def reset(self):
         for i in range(self.end + 1):
-            val = float("inf")
+            val = interval.interval(float("inf"), float("inf"))
             self.buffer.append(val)
 
     def update(self, sample):
         self.buffer.append(sample)
-        sample_return = float("inf")
+        sample_return = interval.interval(float("inf"), float("inf"))
         for i in range(self.end-self.begin+1):
-            sample_return = min(sample_return, self.buffer[i])
+            #TODO: Could fix the mimumum typo in the npinterval repo if time: https://github.com/gtfactslab/npinterval
+            sample_return = sample_return.mimumum(self.buffer[i])
         return sample_return

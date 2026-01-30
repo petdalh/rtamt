@@ -41,6 +41,8 @@ from rtamt.syntax.node.ltl.constant import Constant
 
 from rtamt.exception.exception import RTAMTException
 
+import interval
+
 
 class LtlAstParserVisitor(LtlParserVisitor):
 
@@ -75,12 +77,12 @@ class LtlAstParserVisitor(LtlParserVisitor):
             try:
                 var = self.create_var_from_name(id_head)
                 if (not id_tail):
-                    if (not isinstance(var, (int, float))):
+                    if (not isinstance(var, (int, float, interval.interval))):
                         raise RTAMTException('Variable {} is not of type int or float'.format(id))
                 else:
                     try:
                         value = operator.attrgetter(id_tail)(var)
-                        if (not isinstance(value, (int, float))):
+                        if (not isinstance(value, (int, float, interval.interval))):
                             raise RTAMTException(
                                 'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
                     except AttributeError as err:
@@ -89,6 +91,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
                 if id_tail:
                     raise RTAMTException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
                 else:
+                    #TODO: Might have to update this to handle interval type by default
                     var = float()
                     self.var_object_dict[id] = var
                     self.add_var(id)
@@ -369,12 +372,12 @@ class LtlAstParserVisitor(LtlParserVisitor):
             var = self.var_object_dict[id_head]
             var = self.create_var_from_name(id_head)
             if (not id_tail):
-                if (not isinstance(var, (int, float))):
+                if (not isinstance(var, (int, float, interval.interval))):
                     raise RTAMTException('Variable {} is not of type int or float'.format(id))
             else:
                 try:
                     value = operator.attrgetter(id_tail)(var)
-                    if (not isinstance(value, (int, float))):
+                    if (not isinstance(value, (int, float, interval.interval))):
                         raise RTAMTException(
                             'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
                 except AttributeError as err:
