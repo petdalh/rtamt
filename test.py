@@ -28,7 +28,6 @@ def monitor():
     print(f'T=3: rob={rob3} -> Guaranteed Violation (Upper < 0)')
 
     import sys
-import rtamt
 
 def monitor_always():
     spec = rtamt.StlDiscreteTimeSpecification()

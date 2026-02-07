@@ -34,7 +34,10 @@ class PredicateOperation(AbstractOnlineOperation):
         elif self.comparison_op.value == StlComparisonOperator.NEQ.value:
             sample_return = abs(sample_left - sample_right)
         elif self.comparison_op.value == StlComparisonOperator.LEQ.value or self.comparison_op.value == StlComparisonOperator.LESS.value:
+            print("LEQ or LESS operation in predicate")
+            print(f"sample_left: {sample_left}, sample_right: {sample_right}")
             sample_return = sample_right - sample_left
+            print(f"sample_return: {sample_return}")
         elif self.comparison_op.value == StlComparisonOperator.GEQ.value or self.comparison_op.value == StlComparisonOperator.GREATER.value:
             print("GEQ or GREATER operation in predicate")
             print(f"sample_left: {sample_left}, sample_right: {sample_right}")
