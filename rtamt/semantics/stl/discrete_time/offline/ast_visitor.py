@@ -21,7 +21,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
         sample_return = []
         for i in range(len(sample_left)):
-            print(f"step {i}: {type(sample_left)}, {type(sample_right)} and sample right value is {sample_right[i]}")
+            # print(f"step {i}: {type(sample_left)}, {type(sample_right)} and sample right value is {sample_right[i]}")
             val_left = sample_left[i]
             val_right = sample_right[i]
 
@@ -37,20 +37,20 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
                     val_right = interval.interval(val_right, val_right)
 
             if node.operator.value == StlComparisonOperator.EQ.value:
-                print("EQ operation in predicate")
+                # print("EQ operation in predicate")
                 val = -abs(val_left - val_right)
             elif node.operator.value == StlComparisonOperator.NEQ.value:
-                print("NEQ operation in predicate")
+                # print("NEQ operation in predicate")
                 val = abs(val_left - val_right)
             elif node.operator.value == StlComparisonOperator.LEQ.value or node.operator.value == StlComparisonOperator.LESS.value:
-                print("LEQ or LESS operation in predicate")
+                # print("LEQ or LESS operation in predicate")
                 val = val_right - val_left
             elif node.operator.value == StlComparisonOperator.GEQ.value or node.operator.value == StlComparisonOperator.GREATER.value:
-                print("GEQ or GREATER operation in predicate")
+                # print("GEQ or GREATER operation in predicate")
                 val = val_left - val_right
             else:
                 raise RTAMTException('Unknown predicate operation')
-            print(f"step {i}: val_left={val_left}, val_right={val_right}, val={val}")
+            # print(f"step {i}: val_left={val_left}, val_right={val_right}, val={val}")
             sample_return.append(val)
 
         #print(f"sample return is {sample_return}")
@@ -166,7 +166,12 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        sample_return = list(map(min, zip(sample_left, sample_right)))
+        # sample_return = list(map(min, zip(sample_left, sample_right)))
+        # return sample_return
+
+        sample_return = []
+        for left, right in zip(sample_left, sample_right):
+            sample_return.append(left.mimumum(right))
         return sample_return
 
 
@@ -443,7 +448,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             tmp  = [float("inf") for j in range(len(sample)-len(sample_return))]        
 
         sample_return += tmp
-        print(f"return from always: {sample_return[0:sample_len]}")
+        # print(f"return from always: {sample_return[0:sample_len]}")
         return sample_return[0:sample_len]
 
     def visitTimedEventually(self, node, *args, **kwargs):
@@ -493,7 +498,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             tmp = [-float("inf") for j in range(len(sample)-len(sample_return))]
 
         sample_return += tmp
-        #print(f"return from eventually: {sample_return[0:sample_len]}")
+        # print(f"return from eventually: {sample_return[0:sample_len]}")
         return sample_return[0:sample_len]
 
 
