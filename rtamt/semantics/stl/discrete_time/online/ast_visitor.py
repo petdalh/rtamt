@@ -183,3 +183,27 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
 
     def visitTimedUntil(self, node, *args, **kwargs):
         raise RTAMTException('Bounded until operator not implemented in STL online monitor.')
+
+class IStlDiscreteTimeOnlineAstVisitor(StlDiscreteTimeOnlineAstVisitor):
+    def visitTimedHistorically(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = IHistoricallyTimedOperation(begin, end)    
+
+    def visitTimedOnce(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = IOnceTimedOperation(begin, end)
+
+    def visitOr(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = IOrOperation()
+
+    def visitTimedPrecedes(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = IPrecedesTimedOperation(begin, end)
+
+    def visitPredicate(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = IPredicateOperation(node.operator)
