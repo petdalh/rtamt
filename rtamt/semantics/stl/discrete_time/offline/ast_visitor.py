@@ -7,7 +7,6 @@ from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.exception import RTAMTException
 
-
 class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visit(self, node, *args, **kwargs):
@@ -21,39 +20,17 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
         sample_return = []
         for i in range(len(sample_left)):
-            # print(f"step {i}: {type(sample_left)}, {type(sample_right)} and sample right value is {sample_right[i]}")
-            val_left = sample_left[i]
-            val_right = sample_right[i]
-
-            if not isinstance(val_left, interval.interval):
-                if isinstance(val_left, list):
-                    val_left = interval.interval(val_left[0], val_left[1])
-                else:
-                    val_left = interval.interval(val_left, val_left)
-            if not isinstance(val_right, interval.interval):
-                if isinstance(val_right, list):
-                    val_right = interval.interval(val_right[0], val_right[1])
-                else:
-                    val_right = interval.interval(val_right, val_right)
-
             if node.operator.value == StlComparisonOperator.EQ.value:
-                # print("EQ operation in predicate")
-                val = -abs(val_left - val_right)
+                val = -abs(sample_left[i] - sample_right[i])
             elif node.operator.value == StlComparisonOperator.NEQ.value:
-                # print("NEQ operation in predicate")
-                val = abs(val_left - val_right)
+                val = abs(sample_left[i] - sample_right[i])
             elif node.operator.value == StlComparisonOperator.LEQ.value or node.operator.value == StlComparisonOperator.LESS.value:
-                # print("LEQ or LESS operation in predicate")
-                val = val_right - val_left
+                val = sample_right[i] - sample_left[i]
             elif node.operator.value == StlComparisonOperator.GEQ.value or node.operator.value == StlComparisonOperator.GREATER.value:
-                # print("GEQ or GREATER operation in predicate")
-                val = val_left - val_right
+                val = sample_left[i] - sample_right[i]
             else:
                 raise RTAMTException('Unknown predicate operation')
-            # print(f"step {i}: val_left={val_left}, val_right={val_right}, val={val}")
             sample_return.append(val)
-
-        #print(f"sample return is {sample_return}")
         return sample_return
 
 
@@ -166,26 +143,15 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        # sample_return = list(map(min, zip(sample_left, sample_right)))
-        # return sample_return
-
-        sample_return = []
-        for left, right in zip(sample_left, sample_right):
-            sample_return.append(left.mimumum(right))
+        sample_return = list(map(min, zip(sample_left, sample_right)))
         return sample_return
 
 
     def visitOr(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
-        # print("checking OR operation in offline")
-        # print(f"sample right: {sample_right}")
-        sample_return = []
-        for left, right in zip(sample_left, sample_right):
-            sample_return.append(left.maximum(right))
-        # TODO: Make it compatible when not interval, throw in check
-        #sample_return = list(map(max, zip(sample_left, sample_right)))
-        # print(f"return from OR operation in offline: {sample_return}")
+
+        sample_return = list(map(max, zip(sample_left, sample_right)))
         return sample_return
 
 
@@ -407,48 +373,153 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedAlways(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+        sample_len = len(sample)
+        if sample_len <= end:
+            sample += [float('inf')] * (end - sample_len + 1)
 
+        diff = end - begin
+        sample_return  = [min(sample[j:j+diff+1]) for j in range(begin, end+1)]
+        tmp  = [min(sample[j:j+diff+1]) for j in range(end+1,len(sample))]
+        sample_return += tmp
+        tmp  = [float("inf") for j in range(len(sample)-len(sample_return))]
+        sample_return += tmp
+        return sample_return[0:sample_len]
+
+    def visitTimedEventually(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
         begin, end = self.time_unit_transformer(node)
         sample_len = len(sample)
 
-        if isinstance(sample[0], interval.interval):
-            inf = interval.interval(float("inf"), float("inf"))
-        else:
-            inf = float("inf")
+        if sample_len <= end:
+            sample += [-float('inf')] * (end - sample_len + 1)
+
+        diff = end - begin
+        sample_return  = [max(sample[j:j+diff+1]) for j in range(begin, end+1)]
+        tmp = [max(sample[j:j+diff+1]) for j in range(end+1,len(sample))]
+        sample_return += tmp
+        tmp = [-float("inf") for j in range(len(sample)-len(sample_return))]
+        sample_return += tmp
+        return sample_return[0:sample_len]
+
+
+    def visitTimedUntil(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+
+        sample_return = []
+        buffer_left = collections.deque(maxlen=(end + 1))
+        buffer_right = collections.deque(maxlen=(end + 1))
+
+        for i in range(end + 1):
+            s_left = float("inf")
+            s_right = - float("inf")
+            buffer_left.append(s_left)
+            buffer_right.append(s_right)
+        for i in range(len(sample_left)-1, -1, -1):
+            buffer_left.append(sample_left[i])
+            buffer_right.append(sample_right[i])
+            out_sample = - float("inf")
+
+            for j in range(end-begin+1):
+                c_left = float("inf")
+                c_right = buffer_right[j]
+                for k in range(j+1, end+1):
+                    c_left = min(c_left, buffer_left[k])
+                out_sample = max(out_sample, min(c_left, c_right))
+            sample_return.append(out_sample)
+        sample_return.reverse()
+        return sample_return
+
+# This is the interval version of the offline visitor. It overrides the relevant methods to handle interval values.
+class IStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
+    def visitPredicate(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
+        sample_return = []
+        for i in range(len(sample_left)):
+            # print(f"step {i}: {type(sample_left)}, {type(sample_right)} and sample right value is {sample_right[i]}")
+            val_left = sample_left[i]
+            val_right = sample_right[i]
+
+            if not isinstance(val_left, interval.interval):
+                if isinstance(val_left, list):
+                    val_left = interval.interval(val_left[0], val_left[1])
+                else:
+                    val_left = interval.interval(val_left, val_left)
+            if not isinstance(val_right, interval.interval):
+                if isinstance(val_right, list):
+                    val_right = interval.interval(val_right[0], val_right[1])
+                else:
+                    val_right = interval.interval(val_right, val_right)
+
+            if node.operator.value == StlComparisonOperator.EQ.value:
+                # print("EQ operation in predicate")
+                val = -abs(val_left - val_right)
+            elif node.operator.value == StlComparisonOperator.NEQ.value:
+                # print("NEQ operation in predicate")
+                val = abs(val_left - val_right)
+            elif node.operator.value == StlComparisonOperator.LEQ.value or node.operator.value == StlComparisonOperator.LESS.value:
+                # print("LEQ or LESS operation in predicate")
+                val = val_right - val_left
+            elif node.operator.value == StlComparisonOperator.GEQ.value or node.operator.value == StlComparisonOperator.GREATER.value:
+                # print("GEQ or GREATER operation in predicate")
+                val = val_left - val_right
+            else:
+                raise RTAMTException('Unknown predicate operation')
+            # print(f"step {i}: val_left={val_left}, val_right={val_right}, val={val}")
+            sample_return.append(val)
+
+        #print(f"sample return is {sample_return}")
+        return sample_return
+
+    def visitAnd(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
+        sample_return = []
+        for left, right in zip(sample_left, sample_right):
+            sample_return.append(left.mimumum(right))
+        return sample_return
+
+
+    def visitOr(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+    
+        sample_return = []
+        for left, right in zip(sample_left, sample_right):
+            sample_return.append(left.maximum(right))
+
+        return sample_return
+
+    def visitTimedAlways(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+        sample_len = len(sample)
+
+        inf = interval.interval(float("inf"), float("inf"))
 
         if sample_len <= end:
             sample += [inf] * (end - sample_len + 1)
 
         diff = end - begin
-        if isinstance(sample[0], interval.interval):
-            sample_return = []
-            for i in range(begin, end+1):
-                minimum = interval.interval(float("inf"), float("inf"))
-                for j in range(i, i+diff+1):
-                    minimum = minimum.mimumum(sample[j])
-                sample_return.append(minimum)
+        sample_return = []
+        for i in range(begin, end + 1):
+            minimum = inf
+            for j in range(i, i + diff + 1):
+                minimum = minimum.mimumum(sample[j])
+            sample_return.append(minimum)
 
-            tmp = []
+        for i in range(end + 1, len(sample)):
+            minimum = inf
+            for j in range(i, min(i + diff + 1, len(sample))):
+                minimum = minimum.mimumum(sample[j])
+            sample_return.append(minimum)
 
-            for i in range(end+1, len(sample)):
-                window_limit = min(i + diff + 1, len(sample))
-                minimum = interval.interval(float("inf"), float("inf"))
-                for j in range(i, min(i + diff + 1, len(sample))):
-                    minimum = minimum.mimumum(sample[j])
-                tmp.append(minimum)
-
-            sample_return += tmp
-
-            tmp = [inf for j in range(len(sample) - len(sample_return))]
-
-        elif isinstance(sample[0], (int, float)):
-            sample_return  = [min(sample[j:j+diff+1]) for j in range(begin, end+1)]
-            tmp  = [min(sample[j:j+diff+1]) for j in range(end+1,len(sample))]    
-            sample_return += tmp
-            tmp  = [float("inf") for j in range(len(sample)-len(sample_return))]        
-
-        sample_return += tmp
-        # print(f"return from always: {sample_return[0:sample_len]}")
+        sample_return += [inf] * (len(sample) - len(sample_return))
         return sample_return[0:sample_len]
 
     def visitTimedEventually(self, node, *args, **kwargs):
@@ -500,33 +571,3 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_return += tmp
         # print(f"return from eventually: {sample_return[0:sample_len]}")
         return sample_return[0:sample_len]
-
-
-    def visitTimedUntil(self, node, *args, **kwargs):
-        sample_left  = self.visit(node.children[0], *args, **kwargs)
-        sample_right = self.visit(node.children[1], *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
-
-        sample_return = []
-        buffer_left = collections.deque(maxlen=(end + 1))
-        buffer_right = collections.deque(maxlen=(end + 1))
-
-        for i in range(end + 1):
-            s_left = float("inf")
-            s_right = - float("inf")
-            buffer_left.append(s_left)
-            buffer_right.append(s_right)
-        for i in range(len(sample_left)-1, -1, -1):
-            buffer_left.append(sample_left[i])
-            buffer_right.append(sample_right[i])
-            out_sample = - float("inf")
-
-            for j in range(end-begin+1):
-                c_left = float("inf")
-                c_right = buffer_right[j]
-                for k in range(j+1, end+1):
-                    c_left = min(c_left, buffer_left[k])
-                out_sample = max(out_sample, min(c_left, c_right))
-            sample_return.append(out_sample)
-        sample_return.reverse()
-        return sample_return
