@@ -23,7 +23,7 @@ def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language
     """
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
         spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(mode=mode),
-                                                  StlDiscreteTimeOnlineInterpreter(),
+                                                  StlDiscreteTimeOnlineInterpreter(mode=mode),
                                                   pastifier=StlPastifier())
     elif semantics == Semantics.OUTPUT_ROBUSTNESS and language == Language.PYTHON:
         spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlOutputRobustnessDiscreteTimeOfflineInterpreter(),
@@ -51,8 +51,8 @@ def StlDiscreteTimeOfflineSpecification(mode='STL'):
     spec = AbstractOfflineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(mode=mode), explainer=STLExplainer())
     return spec
 
-def StlDiscreteTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineInterpreter(),
+def StlDiscreteTimeOnlineSpecification(mode='STL'):
+    spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineInterpreter(mode=mode),
                                        pastifier=StlPastifier())
     return spec
 

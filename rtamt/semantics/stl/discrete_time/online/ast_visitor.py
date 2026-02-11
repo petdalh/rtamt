@@ -14,9 +14,9 @@ from rtamt.semantics.arithmetic.discrete_time.online.negate_operation import Neg
 from rtamt.semantics.arithmetic.discrete_time.online.log_operation import LogOperation
 from rtamt.semantics.arithmetic.discrete_time.online.ln_operation import LnOperation
 
-from rtamt.semantics.stl.discrete_time.online.predicate_operation import PredicateOperation
-from rtamt.semantics.stl.discrete_time.online.and_operation import AndOperation
-from rtamt.semantics.stl.discrete_time.online.or_operation import OrOperation
+from rtamt.semantics.stl.discrete_time.online.predicate_operation import PredicateOperation, IPredicateOperation
+from rtamt.semantics.stl.discrete_time.online.and_operation import AndOperation, IAndOperation
+from rtamt.semantics.stl.discrete_time.online.or_operation import OrOperation, IOrOperation
 from rtamt.semantics.stl.discrete_time.online.implies_operation import ImpliesOperation
 from rtamt.semantics.stl.discrete_time.online.iff_operation import IffOperation
 from rtamt.semantics.stl.discrete_time.online.xor_operation import XorOperation
@@ -27,10 +27,10 @@ from rtamt.semantics.stl.discrete_time.online.fall_operation import FallOperatio
 from rtamt.semantics.stl.discrete_time.online.once_operation import OnceOperation
 from rtamt.semantics.stl.discrete_time.online.historically_operation import HistoricallyOperation
 from rtamt.semantics.stl.discrete_time.online.previous_operation import PreviousOperation
-from rtamt.semantics.stl.discrete_time.online.once_timed_operation import OnceTimedOperation
-from rtamt.semantics.stl.discrete_time.online.historically_timed_operation import HistoricallyTimedOperation
+from rtamt.semantics.stl.discrete_time.online.once_timed_operation import OnceTimedOperation, IOnceTimedOperation
+from rtamt.semantics.stl.discrete_time.online.historically_timed_operation import HistoricallyTimedOperation, IHistoricallyTimedOperation
 from rtamt.semantics.stl.discrete_time.online.since_timed_operation import SinceTimedOperation
-from rtamt.semantics.stl.discrete_time.online.precedes_timed_operation import PrecedesTimedOperation
+from rtamt.semantics.stl.discrete_time.online.precedes_timed_operation import PrecedesTimedOperation, IPrecedesTimedOperation
 
 from rtamt.exception.exception import RTAMTException
 
@@ -207,3 +207,7 @@ class IStlDiscreteTimeOnlineAstVisitor(StlDiscreteTimeOnlineAstVisitor):
     def visitPredicate(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = IPredicateOperation(node.operator)
+    
+    def visitAnd(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = IAndOperation()

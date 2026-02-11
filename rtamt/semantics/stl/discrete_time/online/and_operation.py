@@ -10,3 +10,8 @@ class AndOperation(AbstractOnlineOperation):
     def update(self, sample_left, sample_right):
         sample_return = min(sample_left, sample_right)
         return sample_return
+
+class IAndOperation(AndOperation):
+    def update(self, sample_left, sample_right):
+        sample_return = sample_left.mimumum(sample_right)
+        return sample_return
