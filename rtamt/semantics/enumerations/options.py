@@ -6,6 +6,7 @@ class Semantics(Enum):
     INPUT_VACUITY = "input-vacuity"
     INPUT_ROBUSTNESS = "input-robustness"
     OUTPUT_VACUITY = "output-vacuity"
+    INTERVAL_ROBUSTNESS = "interval-robustness"
 
     def __str__(self):
         return self.value

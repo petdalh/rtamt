@@ -5,6 +5,8 @@ from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 
 from rtamt.semantics.stl.discrete_time.offline.interpreter import StlDiscreteTimeOfflineInterpreter
 from rtamt.semantics.stl.discrete_time.online.interpreter import StlDiscreteTimeOnlineInterpreter
+from rtamt.semantics.istl.discrete_time.offline.interpreter import IStlDiscreteTimeOfflineInterpreter
+from rtamt.semantics.istl.discrete_time.online.interpreter import IStlDiscreteTimeOnlineInterpreter
 from rtamt.semantics.iastl.discrete_time.online.interpreter import IAStlOutputRobustnessDiscreteTimeOnlineInterpreter, \
     IAStlInputRobustnessDiscreteTimeOnlineInterpreter, IAStlInputVacuityDiscreteTimeOnlineInterpreter, \
     IAStlOutputVacuityDiscreteTimeOnlineInterpreter
@@ -24,6 +26,10 @@ def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
         spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(mode=mode),
                                                   StlDiscreteTimeOnlineInterpreter(mode=mode),
+                                                  pastifier=StlPastifier())
+    elif semantics == Semantics.INTERVAL_ROBUSTNESS and language == Language.PYTHON:
+        spec = AbstractOfflineOnlineSpecification(StlAst(), IStlDiscreteTimeOfflineInterpreter(),
+                                                  IStlDiscreteTimeOnlineInterpreter(),
                                                   pastifier=StlPastifier())
     elif semantics == Semantics.OUTPUT_ROBUSTNESS and language == Language.PYTHON:
         spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlOutputRobustnessDiscreteTimeOfflineInterpreter(),
