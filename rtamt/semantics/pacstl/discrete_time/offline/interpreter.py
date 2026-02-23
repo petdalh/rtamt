@@ -1,0 +1,7 @@
+from rtamt.semantics.pacstl.discrete_time.offline.ast_visitor import pacSTLDiscreteTimeOfflineAstVisitor
+from rtamt.semantics.pacstl.discrete_time.offline.abstract_discrete_time_offline_interpreter import pacstl_discrete_time_offline_interpreter_factory
+
+def pacSTLDiscreteTimeOfflineInterpreter():
+    ast_visitor = pacSTLDiscreteTimeOfflineAstVisitor
+    pacSTLDiscreteTimeOfflineInterpreter = pacstl_discrete_time_offline_interpreter_factory(ast_visitor)()
+    return pacSTLDiscreteTimeOfflineInterpreter

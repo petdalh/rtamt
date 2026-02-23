@@ -65,18 +65,17 @@ class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
 
     def visitSpec(self, node, online_operator_dict, var_object_dict):
         sample_return = self.visit(node, online_operator_dict, var_object_dict)
-        var_object_dict[node] = sample_return  #TODO subspec name is necessary as a key for var_object_dict.
+        var_object_dict[node.name] = sample_return
         self.results[node] = sample_return
-        print(f"Spec: {node.name}, sample_return: {sample_return}")
         return sample_return
 
     def visitBinary(self, node, online_operator_dict, var_object_dict):
         sample_left  = self.visit(node.children[0], online_operator_dict, var_object_dict)
         sample_right = self.visit(node.children[1], online_operator_dict, var_object_dict)
+        print("We are in visitBinary of AbstractOnlineUpdateVisitor and the node dicitonary is ", online_operator_dict)
         operator = online_operator_dict[node.name]
         sample_return = operator.update(sample_left, sample_right)
         self.results[node] = sample_return
-        print(f"Binary operation: {node.name}, sample_left: {sample_left}, sample_right: {sample_right}, sample_return: {sample_return}")
         return sample_return
 
     def visitUnary(self, node, online_operator_dict, var_object_dict):
@@ -84,7 +83,6 @@ class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
         op = online_operator_dict[node.name]
         sample_return = op.update(sample)
         self.results[node] = sample_return
-        print(f"Unary operation: {node.name}, sample: {sample}, sample_return: {sample_return}")
         return sample_return
 
     def visitLeaf(self, node, online_operator_dict, var_object_dict):
@@ -93,5 +91,4 @@ class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
         elif isinstance(node, Variable):
             sample_return = self.visitVariable(node, online_operator_dict, var_object_dict)
         self.results[node] = sample_return
-        print(f"Leaf node: {node.name}, sample_return: {sample_return}")
         return sample_return

@@ -15,12 +15,12 @@ from rtamt.semantics.arithmetic.discrete_time.online.negate_operation import Neg
 from rtamt.semantics.arithmetic.discrete_time.online.log_operation import LogOperation
 from rtamt.semantics.arithmetic.discrete_time.online.ln_operation import LnOperation
 
-from rtamt.semantics.stl.discrete_time.online.predicate_operation import IPredicateOperation
-from rtamt.semantics.stl.discrete_time.online.and_operation import IAndOperation
-from rtamt.semantics.stl.discrete_time.online.or_operation import IOrOperation
-from rtamt.semantics.stl.discrete_time.online.once_timed_operation import IOnceTimedOperation
-from rtamt.semantics.stl.discrete_time.online.historically_timed_operation import IHistoricallyTimedOperation
-from rtamt.semantics.stl.discrete_time.online.precedes_timed_operation import IPrecedesTimedOperation
+from rtamt.semantics.istl.discrete_time.online.operators.predicate_operation import IPredicateOperation
+from rtamt.semantics.istl.discrete_time.online.operators.and_operation import IAndOperation
+from rtamt.semantics.istl.discrete_time.online.operators.or_operation import IOrOperation
+from rtamt.semantics.istl.discrete_time.online.operators.once_timed_operation import IOnceTimedOperation
+from rtamt.semantics.istl.discrete_time.online.operators.historically_timed_operation import IHistoricallyTimedOperation
+from rtamt.semantics.istl.discrete_time.online.operators.precedes_timed_operation import IPrecedesTimedOperation
 
 from rtamt.exception.exception import RTAMTException
 

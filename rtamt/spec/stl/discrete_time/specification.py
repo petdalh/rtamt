@@ -7,6 +7,7 @@ from rtamt.semantics.stl.discrete_time.offline.interpreter import StlDiscreteTim
 from rtamt.semantics.stl.discrete_time.online.interpreter import StlDiscreteTimeOnlineInterpreter
 from rtamt.semantics.istl.discrete_time.offline.interpreter import IStlDiscreteTimeOfflineInterpreter
 from rtamt.semantics.istl.discrete_time.online.interpreter import IStlDiscreteTimeOnlineInterpreter
+from rtamt.semantics.pacstl.discrete_time.offline.interpreter import pacSTLDiscreteTimeOfflineInterpreter
 from rtamt.semantics.iastl.discrete_time.online.interpreter import IAStlOutputRobustnessDiscreteTimeOnlineInterpreter, \
     IAStlInputRobustnessDiscreteTimeOnlineInterpreter, IAStlInputVacuityDiscreteTimeOnlineInterpreter, \
     IAStlOutputVacuityDiscreteTimeOnlineInterpreter
@@ -16,7 +17,7 @@ from rtamt.semantics.iastl.discrete_time.offline.interpreter import IAStlOutputR
 from rtamt.semantics.enumerations.options import *
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
-def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON, mode='STL'):
+def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):
     """
     A class used as a container for STL continuous time specifications
        Inherits STLSpecification
@@ -24,12 +25,16 @@ def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language
     Attributes:
     """
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(mode=mode),
-                                                  StlDiscreteTimeOnlineInterpreter(mode=mode),
+        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(),
+                                                  StlDiscreteTimeOnlineInterpreter(),
                                                   pastifier=StlPastifier())
     elif semantics == Semantics.INTERVAL_ROBUSTNESS and language == Language.PYTHON:
         spec = AbstractOfflineOnlineSpecification(StlAst(), IStlDiscreteTimeOfflineInterpreter(),
                                                   IStlDiscreteTimeOnlineInterpreter(),
+                                                  pastifier=StlPastifier())
+    elif semantics == Semantics.PAC_STL and language == Language.PYTHON:
+        spec = AbstractOfflineOnlineSpecification(StlAst(), pacSTLDiscreteTimeOfflineInterpreter(),
+                                                  StlDiscreteTimeOnlineInterpreter(),
                                                   pastifier=StlPastifier())
     elif semantics == Semantics.OUTPUT_ROBUSTNESS and language == Language.PYTHON:
         spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlOutputRobustnessDiscreteTimeOfflineInterpreter(),
@@ -53,11 +58,11 @@ def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language
 
 
 
-def StlDiscreteTimeOfflineSpecification(mode='STL'):
+def StlDiscreteTimeOfflineSpecification():
     spec = AbstractOfflineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(mode=mode), explainer=STLExplainer())
     return spec
 
-def StlDiscreteTimeOnlineSpecification(mode='STL'):
+def StlDiscreteTimeOnlineSpecification():
     spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineInterpreter(mode=mode),
                                        pastifier=StlPastifier())
     return spec

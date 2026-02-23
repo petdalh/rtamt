@@ -7,6 +7,7 @@ class Semantics(Enum):
     INPUT_ROBUSTNESS = "input-robustness"
     OUTPUT_VACUITY = "output-vacuity"
     INTERVAL_ROBUSTNESS = "interval-robustness"
+    PAC_STL = "pac-stl"
 
     def __str__(self):
         return self.value

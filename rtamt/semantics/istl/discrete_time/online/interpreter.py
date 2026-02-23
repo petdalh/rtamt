@@ -3,5 +3,5 @@ from rtamt.semantics.abstract_discrete_time_online_interpreter import discrete_t
 
 def IStlDiscreteTimeOnlineInterpreter():
     ast_visitor = IStlDiscreteTimeOnlineAstVisitor
-    stlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(ast_visitor)()
-    return stlDiscreteTimeOnlineInterpreter
+    istlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(ast_visitor)()
+    return istlDiscreteTimeOnlineInterpreter
