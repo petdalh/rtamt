@@ -59,11 +59,11 @@ def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language
 
 
 def StlDiscreteTimeOfflineSpecification():
-    spec = AbstractOfflineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(mode=mode), explainer=STLExplainer())
+    spec = AbstractOfflineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(), explainer=STLExplainer())
     return spec
 
 def StlDiscreteTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineInterpreter(mode=mode),
+    spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineInterpreter(),
                                        pastifier=StlPastifier())
     return spec
 
