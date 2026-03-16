@@ -50,8 +50,9 @@ class pacSTLDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
                 raise RTAMTException('Unknown predicate operation')
             # print(f"step {i}: val_left={val_left}, val_right={val_right}, val={val}")
             sample_return.append(val)
-            t_lows.append(i)
-            t_highs.append(i)
+            # +1 for 1-based indexing in t_lows and t_highs
+            t_lows.append(i+1)
+            t_highs.append(i+1)
 
         #print(f"sample return is {sample_return}")
         return sample_return, t_lows, t_highs

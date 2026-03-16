@@ -256,7 +256,6 @@ class AbstractOfflineSpecification(AbstractSpecification):
 
     # forwarding to interpreter
     def evaluate(self, *args, **kwargs):
-        print("Evaluating specification with dataset")
         if self.set_ast_flag != True:
             self.offline_interpreter.set_ast(self.ast)
             self.set_ast_flag = True

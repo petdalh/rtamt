@@ -1,9 +1,12 @@
-# Generated from LtlParser.g4 by ANTLR 4.7.2
+# Generated from /Users/petterdalhaug/Documents/rtamt/rtamt/antlr/grammar/tl/LtlParser.g4 by ANTLR 4.9.3
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-from typing.io import TextIO
 import sys
+if sys.version_info[1] > 5:
+	from typing import TextIO
+else:
+	from typing.io import TextIO
 
 
 def serializedATN():
@@ -270,7 +273,7 @@ class LtlParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.2")
+        self.checkVersion("4.9.3")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -278,6 +281,7 @@ class LtlParser ( Parser ):
 
 
     class Specification_fileContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -292,14 +296,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_specification_file
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSpecification_file" ):
-                listener.enterSpecification_file(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSpecification_file" ):
-                listener.exitSpecification_file(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSpecification_file" ):
@@ -330,6 +326,7 @@ class LtlParser ( Parser ):
 
 
     class SpecificationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -369,14 +366,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_specification
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSpecification" ):
-                listener.enterSpecification(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSpecification" ):
-                listener.exitSpecification(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSpecification" ):
@@ -457,6 +446,7 @@ class LtlParser ( Parser ):
 
 
     class SpecContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -482,14 +472,6 @@ class LtlParser ( Parser ):
             return self.getToken(LtlParser.Specification, 0)
         def Identifier(self):
             return self.getToken(LtlParser.Identifier, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSpecificationId" ):
-                listener.enterSpecificationId(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSpecificationId" ):
-                listener.exitSpecificationId(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSpecificationId" ):
@@ -520,6 +502,7 @@ class LtlParser ( Parser ):
 
 
     class ModimportContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -550,14 +533,6 @@ class LtlParser ( Parser ):
                 return self.getToken(LtlParser.Identifier, i)
         def Import(self):
             return self.getToken(LtlParser.Import, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterModImport" ):
-                listener.enterModImport(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitModImport" ):
-                listener.exitModImport(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitModImport" ):
@@ -592,6 +567,7 @@ class LtlParser ( Parser ):
 
 
     class AssertionContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -612,14 +588,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_assertion
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAssertion" ):
-                listener.enterAssertion(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAssertion" ):
-                listener.exitAssertion(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAssertion" ):
@@ -660,6 +628,7 @@ class LtlParser ( Parser ):
 
 
     class DeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -685,14 +654,6 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.VariableDeclarationContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDeclVariable" ):
-                listener.enterDeclVariable(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDeclVariable" ):
-                listener.exitDeclVariable(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDeclVariable" ):
                 return visitor.visitDeclVariable(self)
@@ -709,14 +670,6 @@ class LtlParser ( Parser ):
         def constantDeclaration(self):
             return self.getTypedRuleContext(LtlParser.ConstantDeclarationContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDeclConstant" ):
-                listener.enterDeclConstant(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDeclConstant" ):
-                listener.exitDeclConstant(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDeclConstant" ):
@@ -759,6 +712,7 @@ class LtlParser ( Parser ):
 
 
     class AnnotationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -773,14 +727,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_annotation
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAnnotation" ):
-                listener.enterAnnotation(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAnnotation" ):
-                listener.exitAnnotation(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAnnotation" ):
@@ -811,6 +757,7 @@ class LtlParser ( Parser ):
 
 
     class Annotation_typeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -845,14 +792,6 @@ class LtlParser ( Parser ):
             return self.getToken(LtlParser.COMMA, 0)
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterRosTopic" ):
-                listener.enterRosTopic(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitRosTopic" ):
-                listener.exitRosTopic(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitRosTopic" ):
@@ -891,6 +830,7 @@ class LtlParser ( Parser ):
 
 
     class VariableDeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -913,14 +853,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_variableDeclaration
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVariableDeclaration" ):
-                listener.enterVariableDeclaration(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVariableDeclaration" ):
-                listener.exitVariableDeclaration(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitVariableDeclaration" ):
@@ -968,6 +900,7 @@ class LtlParser ( Parser ):
 
 
     class ConstantDeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -992,14 +925,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_constantDeclaration
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterConstantDeclaration" ):
-                listener.enterConstantDeclaration(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitConstantDeclaration" ):
-                listener.exitConstantDeclaration(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitConstantDeclaration" ):
@@ -1036,6 +961,7 @@ class LtlParser ( Parser ):
 
 
     class AssignmentContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1063,14 +989,6 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAsgnExpr" ):
-                listener.enterAsgnExpr(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAsgnExpr" ):
-                listener.exitAsgnExpr(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAsgnExpr" ):
                 return visitor.visitAsgnExpr(self)
@@ -1089,14 +1007,6 @@ class LtlParser ( Parser ):
         def literal(self):
             return self.getTypedRuleContext(LtlParser.LiteralContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAsgnLiteral" ):
-                listener.enterAsgnLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAsgnLiteral" ):
-                listener.exitAsgnLiteral(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAsgnLiteral" ):
@@ -1143,6 +1053,7 @@ class LtlParser ( Parser ):
 
 
     class DomainTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1165,14 +1076,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_domainType
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDomainType" ):
-                listener.enterDomainType(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDomainType" ):
-                listener.exitDomainType(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDomainType" ):
@@ -1207,6 +1110,7 @@ class LtlParser ( Parser ):
 
 
     class IoTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1220,14 +1124,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_ioType
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIoType" ):
-                listener.enterIoType(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIoType" ):
-                listener.exitIoType(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIoType" ):
@@ -1262,6 +1158,7 @@ class LtlParser ( Parser ):
 
 
     class ExpressionContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1288,14 +1185,6 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprNot" ):
-                listener.enterExprNot(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprNot" ):
-                listener.exitExprNot(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprNot" ):
                 return visitor.visitExprNot(self)
@@ -1314,14 +1203,6 @@ class LtlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprNext" ):
-                listener.enterExprNext(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprNext" ):
-                listener.exitExprNext(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprNext" ):
@@ -1346,14 +1227,6 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.AddsubOpContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprAddSub" ):
-                listener.enterExprAddSub(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprAddSub" ):
-                listener.exitExprAddSub(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprAddSub" ):
                 return visitor.visitExprAddSub(self)
@@ -1375,14 +1248,6 @@ class LtlParser ( Parser ):
 
         def UnlessOperator(self):
             return self.getToken(LtlParser.UnlessOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprUnless" ):
-                listener.enterExprUnless(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprUnless" ):
-                listener.exitExprUnless(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprUnless" ):
@@ -1407,14 +1272,6 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprFall" ):
-                listener.enterExprFall(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprFall" ):
-                listener.exitExprFall(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprFall" ):
                 return visitor.visitExprFall(self)
@@ -1437,14 +1294,6 @@ class LtlParser ( Parser ):
         def comparisonOp(self):
             return self.getTypedRuleContext(LtlParser.ComparisonOpContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprPredicate" ):
-                listener.enterExprPredicate(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprPredicate" ):
-                listener.exitExprPredicate(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprPredicate" ):
@@ -1469,14 +1318,6 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprRise" ):
-                listener.enterExprRise(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprRise" ):
-                listener.exitExprRise(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprRise" ):
                 return visitor.visitExprRise(self)
@@ -1498,14 +1339,6 @@ class LtlParser ( Parser ):
 
         def OrOperator(self):
             return self.getToken(LtlParser.OrOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprOr" ):
-                listener.enterExprOr(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprOr" ):
-                listener.exitExprOr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprOr" ):
@@ -1535,14 +1368,6 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprLog" ):
-                listener.enterExprLog(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprLog" ):
-                listener.exitExprLog(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprLog" ):
                 return visitor.visitExprLog(self)
@@ -1558,14 +1383,6 @@ class LtlParser ( Parser ):
 
         def Identifier(self):
             return self.getToken(LtlParser.Identifier, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprId" ):
-                listener.enterExprId(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprId" ):
-                listener.exitExprId(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprId" ):
@@ -1589,14 +1406,6 @@ class LtlParser ( Parser ):
         def SinceOperator(self):
             return self.getToken(LtlParser.SinceOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprSince" ):
-                listener.enterExprSince(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprSince" ):
-                listener.exitExprSince(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprSince" ):
                 return visitor.visitExprSince(self)
@@ -1617,14 +1426,6 @@ class LtlParser ( Parser ):
 
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprParen" ):
-                listener.enterExprParen(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprParen" ):
-                listener.exitExprParen(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprParen" ):
@@ -1648,14 +1449,6 @@ class LtlParser ( Parser ):
         def IffOperator(self):
             return self.getToken(LtlParser.IffOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprIff" ):
-                listener.enterExprIff(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprIff" ):
-                listener.exitExprIff(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprIff" ):
                 return visitor.visitExprIff(self)
@@ -1674,14 +1467,6 @@ class LtlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExpreOnce" ):
-                listener.enterExpreOnce(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExpreOnce" ):
-                listener.exitExpreOnce(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExpreOnce" ):
@@ -1702,14 +1487,6 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprEv" ):
-                listener.enterExprEv(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprEv" ):
-                listener.exitExprEv(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprEv" ):
                 return visitor.visitExprEv(self)
@@ -1728,14 +1505,6 @@ class LtlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprStrongPrevious" ):
-                listener.enterExprStrongPrevious(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprStrongPrevious" ):
-                listener.exitExprStrongPrevious(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprStrongPrevious" ):
@@ -1759,14 +1528,6 @@ class LtlParser ( Parser ):
         def ImpliesOperator(self):
             return self.getToken(LtlParser.ImpliesOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprImplies" ):
-                listener.enterExprImplies(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprImplies" ):
-                listener.exitExprImplies(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprImplies" ):
                 return visitor.visitExprImplies(self)
@@ -1789,14 +1550,6 @@ class LtlParser ( Parser ):
         def UntilOperator(self):
             return self.getToken(LtlParser.UntilOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprUntil" ):
-                listener.enterExprUntil(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprUntil" ):
-                listener.exitExprUntil(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprUntil" ):
                 return visitor.visitExprUntil(self)
@@ -1815,14 +1568,6 @@ class LtlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprStrongNext" ):
-                listener.enterExprStrongNext(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprStrongNext" ):
-                listener.exitExprStrongNext(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprStrongNext" ):
@@ -1847,14 +1592,6 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprAbs" ):
-                listener.enterExprAbs(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprAbs" ):
-                listener.exitExprAbs(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprAbs" ):
                 return visitor.visitExprAbs(self)
@@ -1876,14 +1613,6 @@ class LtlParser ( Parser ):
 
         def AndOperator(self):
             return self.getToken(LtlParser.AndOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprAnd" ):
-                listener.enterExprAnd(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprAnd" ):
-                listener.exitExprAnd(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprAnd" ):
@@ -1913,14 +1642,6 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprPow" ):
-                listener.enterExprPow(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprPow" ):
-                listener.exitExprPow(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprPow" ):
                 return visitor.visitExprPow(self)
@@ -1939,14 +1660,6 @@ class LtlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprPrevious" ):
-                listener.enterExprPrevious(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprPrevious" ):
-                listener.exitExprPrevious(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprPrevious" ):
@@ -1967,14 +1680,6 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprHist" ):
-                listener.enterExprHist(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprHist" ):
-                listener.exitExprHist(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprHist" ):
                 return visitor.visitExprHist(self)
@@ -1993,14 +1698,6 @@ class LtlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprNegate" ):
-                listener.enterExprNegate(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprNegate" ):
-                listener.exitExprNegate(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprNegate" ):
@@ -2023,14 +1720,6 @@ class LtlParser ( Parser ):
 
         def XorOperator(self):
             return self.getToken(LtlParser.XorOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprXor" ):
-                listener.enterExprXor(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprXor" ):
-                listener.exitExprXor(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprXor" ):
@@ -2055,14 +1744,6 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprLn" ):
-                listener.enterExprLn(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprLn" ):
-                listener.exitExprLn(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprLn" ):
                 return visitor.visitExprLn(self)
@@ -2086,14 +1767,6 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprExp" ):
-                listener.enterExprExp(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprExp" ):
-                listener.exitExprExp(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprExp" ):
                 return visitor.visitExprExp(self)
@@ -2113,14 +1786,6 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprAlways" ):
-                listener.enterExprAlways(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprAlways" ):
-                listener.exitExprAlways(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprAlways" ):
                 return visitor.visitExprAlways(self)
@@ -2137,14 +1802,6 @@ class LtlParser ( Parser ):
         def literal(self):
             return self.getTypedRuleContext(LtlParser.LiteralContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprLiteral" ):
-                listener.enterExprLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprLiteral" ):
-                listener.exitExprLiteral(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprLiteral" ):
@@ -2169,14 +1826,6 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.MultdivOpContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprMultDiv" ):
-                listener.enterExprMultDiv(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprMultDiv" ):
-                listener.exitExprMultDiv(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprMultDiv" ):
                 return visitor.visitExprMultDiv(self)
@@ -2199,14 +1848,6 @@ class LtlParser ( Parser ):
 
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprSqrt" ):
-                listener.enterExprSqrt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprSqrt" ):
-                listener.exitExprSqrt(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprSqrt" ):
@@ -2629,6 +2270,7 @@ class LtlParser ( Parser ):
 
 
     class MultdivOpContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2653,14 +2295,6 @@ class LtlParser ( Parser ):
         def DIVIDE(self):
             return self.getToken(LtlParser.DIVIDE, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDiv" ):
-                listener.enterDiv(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDiv" ):
-                listener.exitDiv(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDiv" ):
                 return visitor.visitDiv(self)
@@ -2676,14 +2310,6 @@ class LtlParser ( Parser ):
 
         def TIMES(self):
             return self.getToken(LtlParser.TIMES, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMult" ):
-                listener.enterMult(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMult" ):
-                listener.exitMult(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitMult" ):
@@ -2726,6 +2352,7 @@ class LtlParser ( Parser ):
 
 
     class AddsubOpContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2750,14 +2377,6 @@ class LtlParser ( Parser ):
         def PLUS(self):
             return self.getToken(LtlParser.PLUS, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterPlus" ):
-                listener.enterPlus(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitPlus" ):
-                listener.exitPlus(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPlus" ):
                 return visitor.visitPlus(self)
@@ -2773,14 +2392,6 @@ class LtlParser ( Parser ):
 
         def MINUS(self):
             return self.getToken(LtlParser.MINUS, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMinus" ):
-                listener.enterMinus(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMinus" ):
-                listener.exitMinus(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitMinus" ):
@@ -2823,6 +2434,7 @@ class LtlParser ( Parser ):
 
 
     class ComparisonOpContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2847,14 +2459,6 @@ class LtlParser ( Parser ):
         def GreaterOrEqualOperator(self):
             return self.getToken(LtlParser.GreaterOrEqualOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterGeq" ):
-                listener.enterGeq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitGeq" ):
-                listener.exitGeq(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitGeq" ):
                 return visitor.visitGeq(self)
@@ -2870,14 +2474,6 @@ class LtlParser ( Parser ):
 
         def LesserOrEqualOperator(self):
             return self.getToken(LtlParser.LesserOrEqualOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLeq" ):
-                listener.enterLeq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLeq" ):
-                listener.exitLeq(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLeq" ):
@@ -2895,14 +2491,6 @@ class LtlParser ( Parser ):
         def GreaterOperator(self):
             return self.getToken(LtlParser.GreaterOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterGreater" ):
-                listener.enterGreater(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitGreater" ):
-                listener.exitGreater(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitGreater" ):
                 return visitor.visitGreater(self)
@@ -2918,14 +2506,6 @@ class LtlParser ( Parser ):
 
         def NotEqualOperator(self):
             return self.getToken(LtlParser.NotEqualOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterNeq" ):
-                listener.enterNeq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitNeq" ):
-                listener.exitNeq(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNeq" ):
@@ -2943,14 +2523,6 @@ class LtlParser ( Parser ):
         def EqualOperator(self):
             return self.getToken(LtlParser.EqualOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEq" ):
-                listener.enterEq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEq" ):
-                listener.exitEq(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitEq" ):
                 return visitor.visitEq(self)
@@ -2966,14 +2538,6 @@ class LtlParser ( Parser ):
 
         def LesserOperator(self):
             return self.getToken(LtlParser.LesserOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLess" ):
-                listener.enterLess(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLess" ):
-                listener.exitLess(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLess" ):
@@ -3040,6 +2604,7 @@ class LtlParser ( Parser ):
 
 
     class LiteralContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -3053,14 +2618,6 @@ class LtlParser ( Parser ):
 
         def getRuleIndex(self):
             return LtlParser.RULE_literal
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLiteral" ):
-                listener.enterLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLiteral" ):
-                listener.exitLiteral(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLiteral" ):

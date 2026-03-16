@@ -1,9 +1,12 @@
-# Generated from StlParser.g4 by ANTLR 4.7.2
+# Generated from /Users/petterdalhaug/Documents/rtamt/rtamt/antlr/grammar/tl/StlParser.g4 by ANTLR 4.9.3
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-from typing.io import TextIO
 import sys
+if sys.version_info[1] > 5:
+	from typing import TextIO
+else:
+	from typing.io import TextIO
 
 
 def serializedATN():
@@ -298,7 +301,7 @@ class StlParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.2")
+        self.checkVersion("4.9.3")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -306,6 +309,7 @@ class StlParser ( Parser ):
 
 
     class IntervalContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -332,14 +336,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_interval
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterInterval" ):
-                listener.enterInterval(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitInterval" ):
-                listener.exitInterval(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitInterval" ):
@@ -382,6 +378,7 @@ class StlParser ( Parser ):
 
 
     class IntervalTimeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -410,14 +407,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.UnitContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIntervalTimeLiteral" ):
-                listener.enterIntervalTimeLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIntervalTimeLiteral" ):
-                listener.exitIntervalTimeLiteral(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIntervalTimeLiteral" ):
                 return visitor.visitIntervalTimeLiteral(self)
@@ -436,14 +425,6 @@ class StlParser ( Parser ):
         def unit(self):
             return self.getTypedRuleContext(StlParser.UnitContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterConstantTimeLiteral" ):
-                listener.enterConstantTimeLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitConstantTimeLiteral" ):
-                listener.exitConstantTimeLiteral(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitConstantTimeLiteral" ):
@@ -503,6 +484,7 @@ class StlParser ( Parser ):
 
 
     class UnitContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -522,14 +504,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_unit
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterUnit" ):
-                listener.enterUnit(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitUnit" ):
-                listener.exitUnit(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitUnit" ):
@@ -564,6 +538,7 @@ class StlParser ( Parser ):
 
 
     class ExpressionContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -590,14 +565,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprNot" ):
-                listener.enterExprNot(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprNot" ):
-                listener.exitExprNot(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprNot" ):
                 return visitor.visitExprNot(self)
@@ -616,14 +583,6 @@ class StlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprNext" ):
-                listener.enterExprNext(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprNext" ):
-                listener.exitExprNext(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprNext" ):
@@ -647,14 +606,6 @@ class StlParser ( Parser ):
         def addsubOp(self):
             return self.getTypedRuleContext(StlParser.AddsubOpContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprAddSub" ):
-                listener.enterExprAddSub(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprAddSub" ):
-                listener.exitExprAddSub(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprAddSub" ):
@@ -681,14 +632,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprUnless" ):
-                listener.enterExprUnless(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprUnless" ):
-                listener.exitExprUnless(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprUnless" ):
                 return visitor.visitExprUnless(self)
@@ -711,14 +654,6 @@ class StlParser ( Parser ):
 
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprFall" ):
-                listener.enterExprFall(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprFall" ):
-                listener.exitExprFall(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprFall" ):
@@ -743,14 +678,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.ComparisonOpContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprPredicate" ):
-                listener.enterExprPredicate(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprPredicate" ):
-                listener.exitExprPredicate(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprPredicate" ):
                 return visitor.visitExprPredicate(self)
@@ -774,14 +701,6 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprRise" ):
-                listener.enterExprRise(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprRise" ):
-                listener.exitExprRise(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprRise" ):
                 return visitor.visitExprRise(self)
@@ -803,14 +722,6 @@ class StlParser ( Parser ):
 
         def OrOperator(self):
             return self.getToken(StlParser.OrOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprOr" ):
-                listener.enterExprOr(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprOr" ):
-                listener.exitExprOr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprOr" ):
@@ -840,14 +751,6 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprLog" ):
-                listener.enterExprLog(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprLog" ):
-                listener.exitExprLog(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprLog" ):
                 return visitor.visitExprLog(self)
@@ -863,14 +766,6 @@ class StlParser ( Parser ):
 
         def Identifier(self):
             return self.getToken(StlParser.Identifier, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprId" ):
-                listener.enterExprId(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprId" ):
-                listener.exitExprId(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprId" ):
@@ -897,14 +792,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprSince" ):
-                listener.enterExprSince(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprSince" ):
-                listener.exitExprSince(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprSince" ):
                 return visitor.visitExprSince(self)
@@ -925,14 +812,6 @@ class StlParser ( Parser ):
 
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprParen" ):
-                listener.enterExprParen(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprParen" ):
-                listener.exitExprParen(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprParen" ):
@@ -956,14 +835,6 @@ class StlParser ( Parser ):
         def IffOperator(self):
             return self.getToken(StlParser.IffOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprIff" ):
-                listener.enterExprIff(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprIff" ):
-                listener.exitExprIff(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprIff" ):
                 return visitor.visitExprIff(self)
@@ -985,14 +856,6 @@ class StlParser ( Parser ):
         def interval(self):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExpreOnce" ):
-                listener.enterExpreOnce(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExpreOnce" ):
-                listener.exitExpreOnce(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExpreOnce" ):
@@ -1016,14 +879,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprEv" ):
-                listener.enterExprEv(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprEv" ):
-                listener.exitExprEv(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprEv" ):
                 return visitor.visitExprEv(self)
@@ -1042,14 +897,6 @@ class StlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprStrongPrevious" ):
-                listener.enterExprStrongPrevious(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprStrongPrevious" ):
-                listener.exitExprStrongPrevious(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprStrongPrevious" ):
@@ -1072,14 +919,6 @@ class StlParser ( Parser ):
 
         def ImpliesOperator(self):
             return self.getToken(StlParser.ImpliesOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprImplies" ):
-                listener.enterExprImplies(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprImplies" ):
-                listener.exitExprImplies(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprImplies" ):
@@ -1106,14 +945,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprUntil" ):
-                listener.enterExprUntil(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprUntil" ):
-                listener.exitExprUntil(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprUntil" ):
                 return visitor.visitExprUntil(self)
@@ -1132,14 +963,6 @@ class StlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprStrongNext" ):
-                listener.enterExprStrongNext(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprStrongNext" ):
-                listener.exitExprStrongNext(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprStrongNext" ):
@@ -1164,14 +987,6 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprAbs" ):
-                listener.enterExprAbs(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprAbs" ):
-                listener.exitExprAbs(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprAbs" ):
                 return visitor.visitExprAbs(self)
@@ -1193,14 +1008,6 @@ class StlParser ( Parser ):
 
         def AndOperator(self):
             return self.getToken(StlParser.AndOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprAnd" ):
-                listener.enterExprAnd(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprAnd" ):
-                listener.exitExprAnd(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprAnd" ):
@@ -1230,14 +1037,6 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprPow" ):
-                listener.enterExprPow(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprPow" ):
-                listener.exitExprPow(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprPow" ):
                 return visitor.visitExprPow(self)
@@ -1256,14 +1055,6 @@ class StlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprPrevious" ):
-                listener.enterExprPrevious(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprPrevious" ):
-                listener.exitExprPrevious(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprPrevious" ):
@@ -1287,14 +1078,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprHist" ):
-                listener.enterExprHist(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprHist" ):
-                listener.exitExprHist(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprHist" ):
                 return visitor.visitExprHist(self)
@@ -1313,14 +1096,6 @@ class StlParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprNegate" ):
-                listener.enterExprNegate(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprNegate" ):
-                listener.exitExprNegate(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprNegate" ):
@@ -1343,14 +1118,6 @@ class StlParser ( Parser ):
 
         def XorOperator(self):
             return self.getToken(StlParser.XorOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprXor" ):
-                listener.enterExprXor(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprXor" ):
-                listener.exitExprXor(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprXor" ):
@@ -1375,14 +1142,6 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprLn" ):
-                listener.enterExprLn(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprLn" ):
-                listener.exitExprLn(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprLn" ):
                 return visitor.visitExprLn(self)
@@ -1406,14 +1165,6 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprExp" ):
-                listener.enterExprExp(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprExp" ):
-                listener.exitExprExp(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprExp" ):
                 return visitor.visitExprExp(self)
@@ -1436,14 +1187,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprAlways" ):
-                listener.enterExprAlways(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprAlways" ):
-                listener.exitExprAlways(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprAlways" ):
                 return visitor.visitExprAlways(self)
@@ -1460,14 +1203,6 @@ class StlParser ( Parser ):
         def literal(self):
             return self.getTypedRuleContext(StlParser.LiteralContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprLiteral" ):
-                listener.enterExprLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprLiteral" ):
-                listener.exitExprLiteral(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprLiteral" ):
@@ -1492,14 +1227,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.MultdivOpContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprMultDiv" ):
-                listener.enterExprMultDiv(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprMultDiv" ):
-                listener.exitExprMultDiv(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprMultDiv" ):
                 return visitor.visitExprMultDiv(self)
@@ -1522,14 +1249,6 @@ class StlParser ( Parser ):
 
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprSqrt" ):
-                listener.enterExprSqrt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprSqrt" ):
-                listener.exitExprSqrt(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitExprSqrt" ):
@@ -2009,6 +1728,7 @@ class StlParser ( Parser ):
 
 
     class Specification_fileContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2023,14 +1743,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_specification_file
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSpecification_file" ):
-                listener.enterSpecification_file(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSpecification_file" ):
-                listener.exitSpecification_file(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSpecification_file" ):
@@ -2061,6 +1773,7 @@ class StlParser ( Parser ):
 
 
     class SpecificationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2100,14 +1813,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_specification
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSpecification" ):
-                listener.enterSpecification(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSpecification" ):
-                listener.exitSpecification(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSpecification" ):
@@ -2188,6 +1893,7 @@ class StlParser ( Parser ):
 
 
     class SpecContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2213,14 +1919,6 @@ class StlParser ( Parser ):
             return self.getToken(StlParser.Specification, 0)
         def Identifier(self):
             return self.getToken(StlParser.Identifier, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSpecificationId" ):
-                listener.enterSpecificationId(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSpecificationId" ):
-                listener.exitSpecificationId(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSpecificationId" ):
@@ -2251,6 +1949,7 @@ class StlParser ( Parser ):
 
 
     class ModimportContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2281,14 +1980,6 @@ class StlParser ( Parser ):
                 return self.getToken(StlParser.Identifier, i)
         def Import(self):
             return self.getToken(StlParser.Import, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterModImport" ):
-                listener.enterModImport(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitModImport" ):
-                listener.exitModImport(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitModImport" ):
@@ -2323,6 +2014,7 @@ class StlParser ( Parser ):
 
 
     class AssertionContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2343,14 +2035,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_assertion
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAssertion" ):
-                listener.enterAssertion(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAssertion" ):
-                listener.exitAssertion(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAssertion" ):
@@ -2391,6 +2075,7 @@ class StlParser ( Parser ):
 
 
     class DeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2416,14 +2101,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.VariableDeclarationContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDeclVariable" ):
-                listener.enterDeclVariable(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDeclVariable" ):
-                listener.exitDeclVariable(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDeclVariable" ):
                 return visitor.visitDeclVariable(self)
@@ -2440,14 +2117,6 @@ class StlParser ( Parser ):
         def constantDeclaration(self):
             return self.getTypedRuleContext(StlParser.ConstantDeclarationContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDeclConstant" ):
-                listener.enterDeclConstant(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDeclConstant" ):
-                listener.exitDeclConstant(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDeclConstant" ):
@@ -2490,6 +2159,7 @@ class StlParser ( Parser ):
 
 
     class AnnotationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2504,14 +2174,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_annotation
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAnnotation" ):
-                listener.enterAnnotation(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAnnotation" ):
-                listener.exitAnnotation(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAnnotation" ):
@@ -2542,6 +2204,7 @@ class StlParser ( Parser ):
 
 
     class Annotation_typeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2576,14 +2239,6 @@ class StlParser ( Parser ):
             return self.getToken(StlParser.COMMA, 0)
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterRosTopic" ):
-                listener.enterRosTopic(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitRosTopic" ):
-                listener.exitRosTopic(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitRosTopic" ):
@@ -2622,6 +2277,7 @@ class StlParser ( Parser ):
 
 
     class VariableDeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2644,14 +2300,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_variableDeclaration
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVariableDeclaration" ):
-                listener.enterVariableDeclaration(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVariableDeclaration" ):
-                listener.exitVariableDeclaration(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitVariableDeclaration" ):
@@ -2699,6 +2347,7 @@ class StlParser ( Parser ):
 
 
     class ConstantDeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2723,14 +2372,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_constantDeclaration
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterConstantDeclaration" ):
-                listener.enterConstantDeclaration(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitConstantDeclaration" ):
-                listener.exitConstantDeclaration(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitConstantDeclaration" ):
@@ -2767,6 +2408,7 @@ class StlParser ( Parser ):
 
 
     class AssignmentContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2794,14 +2436,6 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAsgnExpr" ):
-                listener.enterAsgnExpr(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAsgnExpr" ):
-                listener.exitAsgnExpr(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAsgnExpr" ):
                 return visitor.visitAsgnExpr(self)
@@ -2820,14 +2454,6 @@ class StlParser ( Parser ):
         def literal(self):
             return self.getTypedRuleContext(StlParser.LiteralContext,0)
 
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAsgnLiteral" ):
-                listener.enterAsgnLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAsgnLiteral" ):
-                listener.exitAsgnLiteral(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAsgnLiteral" ):
@@ -2874,6 +2500,7 @@ class StlParser ( Parser ):
 
 
     class DomainTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2896,14 +2523,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_domainType
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDomainType" ):
-                listener.enterDomainType(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDomainType" ):
-                listener.exitDomainType(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDomainType" ):
@@ -2938,6 +2557,7 @@ class StlParser ( Parser ):
 
 
     class IoTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2951,14 +2571,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_ioType
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIoType" ):
-                listener.enterIoType(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIoType" ):
-                listener.exitIoType(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitIoType" ):
@@ -2993,6 +2605,7 @@ class StlParser ( Parser ):
 
 
     class MultdivOpContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -3017,14 +2630,6 @@ class StlParser ( Parser ):
         def DIVIDE(self):
             return self.getToken(StlParser.DIVIDE, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDiv" ):
-                listener.enterDiv(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDiv" ):
-                listener.exitDiv(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDiv" ):
                 return visitor.visitDiv(self)
@@ -3040,14 +2645,6 @@ class StlParser ( Parser ):
 
         def TIMES(self):
             return self.getToken(StlParser.TIMES, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMult" ):
-                listener.enterMult(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMult" ):
-                listener.exitMult(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitMult" ):
@@ -3090,6 +2687,7 @@ class StlParser ( Parser ):
 
 
     class AddsubOpContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -3114,14 +2712,6 @@ class StlParser ( Parser ):
         def PLUS(self):
             return self.getToken(StlParser.PLUS, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterPlus" ):
-                listener.enterPlus(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitPlus" ):
-                listener.exitPlus(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPlus" ):
                 return visitor.visitPlus(self)
@@ -3137,14 +2727,6 @@ class StlParser ( Parser ):
 
         def MINUS(self):
             return self.getToken(StlParser.MINUS, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMinus" ):
-                listener.enterMinus(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMinus" ):
-                listener.exitMinus(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitMinus" ):
@@ -3187,6 +2769,7 @@ class StlParser ( Parser ):
 
 
     class ComparisonOpContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -3211,14 +2794,6 @@ class StlParser ( Parser ):
         def GreaterOrEqualOperator(self):
             return self.getToken(StlParser.GreaterOrEqualOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterGeq" ):
-                listener.enterGeq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitGeq" ):
-                listener.exitGeq(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitGeq" ):
                 return visitor.visitGeq(self)
@@ -3234,14 +2809,6 @@ class StlParser ( Parser ):
 
         def LesserOrEqualOperator(self):
             return self.getToken(StlParser.LesserOrEqualOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLeq" ):
-                listener.enterLeq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLeq" ):
-                listener.exitLeq(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLeq" ):
@@ -3259,14 +2826,6 @@ class StlParser ( Parser ):
         def GreaterOperator(self):
             return self.getToken(StlParser.GreaterOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterGreater" ):
-                listener.enterGreater(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitGreater" ):
-                listener.exitGreater(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitGreater" ):
                 return visitor.visitGreater(self)
@@ -3282,14 +2841,6 @@ class StlParser ( Parser ):
 
         def NotEqualOperator(self):
             return self.getToken(StlParser.NotEqualOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterNeq" ):
-                listener.enterNeq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitNeq" ):
-                listener.exitNeq(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNeq" ):
@@ -3307,14 +2858,6 @@ class StlParser ( Parser ):
         def EqualOperator(self):
             return self.getToken(StlParser.EqualOperator, 0)
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEq" ):
-                listener.enterEq(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEq" ):
-                listener.exitEq(self)
-
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitEq" ):
                 return visitor.visitEq(self)
@@ -3330,14 +2873,6 @@ class StlParser ( Parser ):
 
         def LesserOperator(self):
             return self.getToken(StlParser.LesserOperator, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLess" ):
-                listener.enterLess(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLess" ):
-                listener.exitLess(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLess" ):
@@ -3404,6 +2939,7 @@ class StlParser ( Parser ):
 
 
     class LiteralContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -3417,14 +2953,6 @@ class StlParser ( Parser ):
 
         def getRuleIndex(self):
             return StlParser.RULE_literal
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLiteral" ):
-                listener.enterLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLiteral" ):
-                listener.exitLiteral(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLiteral" ):
