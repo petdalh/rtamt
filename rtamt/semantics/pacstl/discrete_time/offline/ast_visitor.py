@@ -68,7 +68,7 @@ class pacSTLDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
         for i, (left, right) in enumerate(zip(sample_left, sample_right)):
             t_lows.append(left_t_lows[i] if left.l < right.l else right_t_lows[i])
             t_highs.append(left_t_highs[i] if left.u < right.u else right_t_highs[i])
-            sample_return.append(left.mimumum(right))
+            sample_return.append(left.minimum(right))
 
         return sample_return, t_lows, t_highs
 
@@ -119,7 +119,7 @@ class pacSTLDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
                     min_t_low = s_t_lows[j]
                 if curr.u < minimum.u:
                     min_t_high = s_t_highs[j]
-                minimum = minimum.mimumum(curr)
+                minimum = minimum.minimum(curr)
             sample_return.append(minimum)
             t_lows.append(min_t_low)
             t_highs.append(min_t_high)
@@ -134,7 +134,7 @@ class pacSTLDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
                     min_t_low = s_t_lows[j]
                 if curr.u < minimum.u:
                     min_t_high = s_t_highs[j]
-                minimum = minimum.mimumum(curr)
+                minimum = minimum.minimum(curr)
             sample_return.append(minimum)
             t_lows.append(min_t_low)
             t_highs.append(min_t_high)

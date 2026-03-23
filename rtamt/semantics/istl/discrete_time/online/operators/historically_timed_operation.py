@@ -13,6 +13,5 @@ class IHistoricallyTimedOperation(HistoricallyTimedOperation):
         self.buffer.append(sample)
         sample_return = interval.interval(float("inf"), float("inf"))
         for i in range(self.end-self.begin+1):
-            #TODO: Could fix the mimumum typo in the npinterval repo if time: https://github.com/gtfactslab/npinterval
-            sample_return = sample_return.mimumum(self.buffer[i])
+            sample_return = sample_return.minimum(self.buffer[i])
         return sample_return

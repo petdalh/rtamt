@@ -10,5 +10,5 @@ class IAndOperation(AndOperation):
         pass
 
     def update(self, sample_left, sample_right):
-        sample_return = sample_left.mimumum(sample_right)
+        sample_return = sample_left.minimum(sample_right)
         return sample_return

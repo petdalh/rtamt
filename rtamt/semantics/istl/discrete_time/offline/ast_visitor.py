@@ -57,7 +57,7 @@ class IStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
 
         sample_return = []
         for left, right in zip(sample_left, sample_right):
-            sample_return.append(left.mimumum(right))
+            sample_return.append(left.minimum(right))
         return sample_return
 
 
@@ -86,13 +86,13 @@ class IStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
         for i in range(begin, end + 1):
             minimum = inf
             for j in range(i, i + diff + 1):
-                minimum = minimum.mimumum(sample[j])
+                minimum = minimum.minimum(sample[j])
             sample_return.append(minimum)
 
         for i in range(end + 1, len(sample)):
             minimum = inf
             for j in range(i, min(i + diff + 1, len(sample))):
-                minimum = minimum.mimumum(sample[j])
+                minimum = minimum.minimum(sample[j])
             sample_return.append(minimum)
 
         sample_return += [inf] * (len(sample) - len(sample_return))
@@ -142,8 +142,202 @@ class IStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
             sample_return  = [max(sample[j:j+diff+1]) for j in range(begin, end+1)]
             tmp = [max(sample[j:j+diff+1]) for j in range(end+1,len(sample))]
             sample_return += tmp
-            tmp = [-float("inf") for j in range(len(sample)-len(sample_return))]
+            tmp = [interval.interval(-float("inf"), -float("inf")) for j in range(len(sample)-len(sample_return))]
 
         sample_return += tmp
-        # print(f"return from eventually: {sample_return[0:sample_len]}")
         return sample_return[0:sample_len]
+
+    def visitImplies(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
+        sample_return = [(-l).maximum(r) for l,r in zip(sample_left, sample_right)]
+        return sample_return
+
+    def visitEventually(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        prev_out = interval.interval(-float("inf"), -float("inf"))
+        for i in reversed(sample):
+            out_sample = i.maximum(prev_out)
+            prev_out = out_sample
+            sample_return.append(out_sample)
+        sample_return.reverse()
+        return sample_return
+
+    def visitAlways(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        prev_out = interval.interval(float("inf"), float("inf"))
+        for i in reversed(sample):
+            out_sample = i.minimum(prev_out)
+            prev_out = out_sample
+            sample_return.append(out_sample)
+        sample_return.reverse()
+        return sample_return
+
+
+    def visitUntil(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
+        sample_return = []
+        next_out = interval.interval(-float("inf"), -float("inf"))
+        for i in range(len(sample_left)-1, -1, -1):
+            out_sample = sample_left[i].minimum(next_out)
+            out_sample = out_sample.maximum(sample_right[i])
+            next_out = out_sample
+            sample_return.append(out_sample)
+        sample_return.reverse()
+        return sample_return
+
+
+    def visitOnce(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        prev_out = interval.interval(-float("inf"), -float("inf"))
+        for i in sample:
+            out_sample = i.maximum(prev_out)
+            prev_out = out_sample
+            sample_return.append(out_sample)
+        return sample_return
+
+
+    def visitHistorically(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        prev_out = interval.interval(float("inf"), float("inf"))
+        for i in sample:
+            out_sample = i.minimum(prev_out)
+            prev_out = out_sample
+            sample_return.append(out_sample)
+        return sample_return
+
+
+    def visitSince(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
+        sample_return = []
+        prev_out = interval.interval(-float("inf"), -float("inf"))
+        for i in range(len(sample_left)):
+            out_sample = sample_left[i].minimum(prev_out)
+            out_sample = out_sample.maximum(sample_right[i])
+            prev_out = out_sample
+            sample_return.append(out_sample)
+        return sample_return
+
+
+    def visitRise(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        prev = sample[:-1]
+        prev.insert(0,interval.interval(-float("inf"), -float("inf")))
+        sample_return = [(-p).minimum(s) for p,s in zip(prev, sample)]
+        return sample_return
+
+
+    def visitFall(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        prev = sample[:-1]
+        prev.insert(0,interval.interval(float("inf"), float("inf")))
+        sample_return = [p.minimum(-s) for p,s in zip(prev, sample)]
+        return sample_return
+
+    def visitTimedOnce(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+
+        neg_inf = interval.interval(-float("inf"), -float("inf"))
+        sample = [neg_inf for j in range(end)] + sample
+
+        sample_return = []
+        for j in range(end, len(sample)):
+            maximum = neg_inf
+            for k in range(j - end, j - begin + 1):
+                maximum = maximum.maximum(sample[k])
+            sample_return.append(maximum)
+
+        return sample_return
+
+
+    def visitTimedHistorically(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+
+        inf = interval.interval(float("inf"), float("inf"))
+        sample = [inf for j in range(end)] + sample
+
+        sample_return = []
+        for j in range(end, len(sample)):
+            minimum = inf
+            for k in range(j - end, j - begin + 1):
+                minimum = minimum.minimum(sample[k])
+            sample_return.append(minimum)
+
+        return sample_return
+
+    def visitTimedSince(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+
+        sample_return = []
+        buffer_left = collections.deque(maxlen=(end + 1))
+        buffer_right = collections.deque(maxlen=(end + 1))
+
+        for i in range(end + 1):
+            s_left = interval.interval(float("inf"), float("inf"))
+            s_right = interval.interval(-float("inf"), -float("inf"))
+            buffer_left.append(s_left)
+            buffer_right.append(s_right)
+
+        for i in range(len(sample_left)):
+            buffer_left.append(sample_left[i])
+            buffer_right.append(sample_right[i])
+            out_sample = interval.interval(-float("inf"), -float("inf"))
+            
+
+            for j in range(end-begin+1):
+                c_left = interval.interval(float("inf"), float("inf"))
+                c_right = buffer_right[j]
+                for k in range(j+1, end+1):
+                    c_left = c_left.minimum(buffer_left[k])
+                out_sample = out_sample.maximum(c_left.minimum(c_right))
+            sample_return.append(out_sample)
+        return sample_return
+
+
+    def visitTimedUntil(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+
+        sample_return = []
+        buffer_left = collections.deque(maxlen=(end + 1))
+        buffer_right = collections.deque(maxlen=(end + 1))
+
+        for i in range(end + 1):
+            s_left = interval.interval(float("inf"), float("inf"))
+            s_right = interval.interval(-float("inf"), -float("inf"))
+            buffer_left.append(s_left)
+            buffer_right.append(s_right)
+        for i in range(len(sample_left)-1, -1, -1):
+            buffer_left.append(sample_left[i])
+            buffer_right.append(sample_right[i])
+            out_sample = interval.interval(-float("inf"), -float("inf"))
+
+            for j in range(end-begin+1):
+                c_left = interval.interval(float("inf"), float("inf"))
+                c_right = buffer_right[j]
+                for k in range(j+1, end+1):
+                    c_left = c_left.minimum(buffer_left[k])
+                out_sample = out_sample.maximum(c_left.minimum(c_right))
+            sample_return.append(out_sample)
+        sample_return.reverse()
+        return sample_return

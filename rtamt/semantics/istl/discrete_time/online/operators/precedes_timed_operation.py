@@ -20,7 +20,7 @@ class IPrecedesTimedOperation(PrecedesTimedOperation):
             sample_left = interval.interval(float("inf"), float("inf"))
             sample_right = self.buffer[1][i]
             for j in range(0, i):
-                sample_left = sample_left.mimumum(self.buffer[0][j])
-            sample_return = sample_return.maximum(sample_left.mimumum(sample_right))
+                sample_left = sample_left.minimum(self.buffer[0][j])
+            sample_return = sample_return.maximum(sample_left.minimum(sample_right))
 
         return sample_return
