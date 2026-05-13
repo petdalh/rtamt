@@ -173,7 +173,7 @@ class pacSTLDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
                 max_t_low  = -1
                 max_t_high = -1
                 
-                for j in range(i, i+diff+1):
+                for j in range(i, min(i + diff + 1, len(sample))):
                     curr = sample[j]
                     if curr.l > maximum.l:
                         max_t_low = s_t_lows[j]
@@ -263,7 +263,6 @@ class pacSTLDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):
         t_lows        += tmp_t_lows
         t_highs       += tmp_t_highs
 
-        # print(f"return from eventually: {sample_return[0:sample_len]}")
         return sample_return[0:sample_len], t_lows[0:sample_len], t_highs[0:sample_len]
         
     def visitImplies(self, node, *args, **kwargs):
